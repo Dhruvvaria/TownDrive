@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import FeaturedSection from "../components/FeaturedSection";
 import Banner from "../components/Banner";
 import Testimonials from "../components/Testimonials";
-import Newsletter from "../components/newsletter";
+import Newsletter from "../components/Newsletter";
 
 function Home() {
   return (
