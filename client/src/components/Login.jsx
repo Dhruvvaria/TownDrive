@@ -1,17 +1,42 @@
 import React, { useState } from "react";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
+import { motion } from "motion/react";
 
-function Login({ setShowLogin }) {
+function Login() {
+  const { setShowLogin, axios, setToken, navigate } = useAppContext();
   const [state, setState] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+      const { data } = await axios.post(`/api/user/${state}`, {
+        name,
+        email,
+        password,
+      });
+
+      if (data.success) {
+        navigate("/");
+        setToken(data.token);
+        localStorage.setItem("token", data.token);
+        setShowLogin(false);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.2, ease: "easeIn" }}
       onClick={() => setShowLogin(false)}
       className="fixed top-0 left-0 bottom-0 right-0 z-100 flex items-center text-sm text-gray-600 bg-black/50">
       <form
@@ -80,7 +105,7 @@ function Login({ setShowLogin }) {
           {state === "register" ? "Create Account" : "Login"}
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,13 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { dummyMyBookingsData } from "../../assets/assets";
 import Title from "../../components/owner/Title";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 function ManageBookings() {
-  const currency = import.meta.env.VITE_CURRENCY;
+  const { currency, axios } = useAppContext();
   const [bookings, setBookings] = useState([]);
 
   const fetchOwnerBookings = async () => {
-    setBookings(dummyMyBookingsData);
+    try {
+      const { data } = await axios.get("/api/bookings/owner");
+      data.success ? setBookings(data.bookings) : toast.error(data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
+  };
+
+  const changeBookingStatus = async (bookingId, status) => {
+    try {
+      const { data } = await axios.post("/api/bookings/change-status", {
+        bookingId,
+        status,
+      });
+      if (data.success) {
+        toast.success(data.message);
+        fetchOwnerBookings();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
   };
 
   useEffect(() => {
@@ -48,7 +71,7 @@ function ManageBookings() {
                   </p>
                 </td>
                 <td className="p-3 max-md:hidden">
-                  {booking.pickupDate.split("T")[0]} to{" "}
+                  {booking.pickUpDate.split("T")[0]} to{" "}
                   {booking.returnDate.split("T")[0]}
                 </td>
                 <td className="p-3">
@@ -62,6 +85,9 @@ function ManageBookings() {
                 <td className="p-3">
                   {booking.status === "pending" ? (
                     <select
+                      onChange={(e) =>
+                        changeBookingStatus(booking._id, e.target.value)
+                      }
                       value={booking.status}
                       className="px-2 py-1.5 mt-1 text-gray-500 border border-borderColor rounded-md outline-none">
                       <option value="pending">Pending</option>
