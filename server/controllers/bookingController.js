@@ -14,7 +14,7 @@ module.exports.checkAvailabilityOfCar = async (req, res) => {
   try {
     const { location, pickUpDate, returnDate } = req.body;
 
-    const cars = await Car.find({ location, isAvailiable: true });
+    const cars = await Car.find({ location, isAvailable: true });
 
     const availableCarsPromises = cars.map(async (car) => {
       const isAvailable = await checkAvailability(

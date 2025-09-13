@@ -80,7 +80,7 @@ module.exports.getUserData = async (req, res) => {
 
 module.exports.getCars = async (req, res) => {
   try {
-    const cars = await Car.find({ isAvailiable: true });
+    const cars = await Car.find({ isAvailable: true });
     res.json({ success: true, cars });
   } catch (error) {
     console.error("Error fetching cars:", error.message);

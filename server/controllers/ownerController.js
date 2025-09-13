@@ -74,7 +74,7 @@ module.exports.toggleCarAvailability = async (req, res) => {
       return res.json({ success: false, message: "Unauthorized" });
     }
 
-    car.isAvailiable = !car.isAvailiable;
+    car.isAvailable = !car.isAvailable;
     await car.save();
 
     res.json({ success: true, message: "Availability Toggled" });
@@ -95,7 +95,7 @@ module.exports.deleteCar = async (req, res) => {
     }
 
     car.owner = null;
-    car.isAvailiable = false;
+    car.isAvailable = false;
     await car.save();
 
     res.json({ success: true, message: "Car removed" });
