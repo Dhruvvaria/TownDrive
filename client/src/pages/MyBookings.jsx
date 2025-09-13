@@ -3,6 +3,7 @@ import { assets } from "../assets/assets";
 import Title from "../components/Title";
 import { useAppContext } from "../context/AppContext";
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 
 function MyBookings() {
   const { axios, user, currency } = useAppContext();
@@ -37,6 +38,21 @@ function MyBookings() {
         subTitle="View and manage your all car bookings"
         align="left"
       />
+
+      {bookings.length === 0 && (
+        <div className="bg-red-100 border w-full border-red-400 text-red-700 px-6 py-4 mt-6 rounded-lg shadow-md text-center">
+          <h3 className="text-lg font-semibold">No Bookings Found !!</h3>
+          <p className="mt-2">
+            You don’t have any bookings yet.{" "}
+            <Link
+              to="/cars"
+              className="text-blue-600 font-medium hover:underline">
+              Book a car now
+            </Link>{" "}
+            and start your ride!
+          </p>
+        </div>
+      )}
 
       <div>
         {bookings.map((booking, index) => (
