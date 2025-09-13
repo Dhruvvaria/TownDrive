@@ -179,7 +179,7 @@ module.exports.updateUserImage = async (req, res) => {
 
     await User.findByIdAndUpdate(_id, { image });
     res.json({ success: true, message: "Image Updated" });
-  } catch (e) {
+  } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
   }
