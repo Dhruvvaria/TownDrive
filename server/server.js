@@ -11,18 +11,7 @@ const app = express();
 
 connectDB();
 
-const allowedOrigins = [
-  "http://localhost:5173", // local dev
-  "https://town-drive.vercel.app", // deployed frontend
-];
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true, // if using cookies / auth headers
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
