@@ -11,23 +11,18 @@ const app = express();
 
 connectDB();
 
-// Configure CORS properly for production
-const corsOptions = {
-  origin: [
-    "http://localhost:3000", // For local development
-    "http://localhost:5173", // For Vite dev server
-    "https://town-drive.vercel.app", // Your production frontend URL
-  ],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "x-requested-with"],
-};
+const allowedOrigins = [
+  "http://localhost:5173", // local dev
+  "https://town-drive.vercel.app", // deployed frontend
+];
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // if using cookies / auth headers
+  })
+);
 
-// Handle preflight requests
-app.options("*", cors(corsOptions));
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
