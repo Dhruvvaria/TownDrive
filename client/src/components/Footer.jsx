@@ -21,7 +21,7 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.3 }}
             src={assets.logo}
             alt="logo"
-            className="h-8 md:h-9"
+            className="h-12 md:h-16"
           />
           <motion.p
             initial={{ opacity: 0 }}

@@ -33,7 +33,7 @@ function Navbar() {
       initial={{ y: -25, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-6 text-gray-600 border-b border-borderColor relative transition-all ${
+      className={`flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-2 text-gray-600 border-b border-borderColor relative transition-all ${
         location.pathname === "/" && "bg-light"
       }`}>
       <Link to="/">
@@ -41,7 +41,7 @@ function Navbar() {
           whileHover={{ scale: 1.05 }}
           src={assets.logo}
           alt="logo"
-          className="h-8"
+          className="h-16"
         />
       </Link>
 
