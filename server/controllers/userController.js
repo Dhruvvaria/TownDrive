@@ -87,7 +87,3 @@ module.exports.getCars = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
-module.exports.msg = (req, res) => {
-  res.send("This is user message");
-};
