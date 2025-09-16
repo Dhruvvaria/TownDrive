@@ -5,6 +5,7 @@ import { useAppContext } from "../../context/AppContext";
 import { Form } from "react-router-dom";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader";
+import { motion } from "motion/react";
 
 function AddCar() {
   const { axios, currency } = useAppContext();
@@ -13,12 +14,12 @@ function AddCar() {
   const [car, setCar] = useState({
     brand: "",
     model: "",
-    year: 0,
-    pricePerDay: 0,
+    year: "",
+    pricePerDay: "",
     category: "",
     transmission: "",
     fuel_type: "",
-    seating_capacity: 0,
+    seating_capacity: "",
     location: "",
     description: "",
   });
@@ -69,7 +70,10 @@ function AddCar() {
       {isLoading ? (
         <Loader />
       ) : (
-        <form
+        <motion.form
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           action=""
           onSubmit={onSubmitHandler}
           className="flex flex-col gap-5 text-gray-500 text-sm mt-6 max-w-xl">
@@ -232,7 +236,7 @@ function AddCar() {
             <img src={assets.tick_icon} alt="tick" />{" "}
             {isLoading ? "Loading.." : "List Your Car"}
           </button>
-        </form>
+        </motion.form>
       )}
     </div>
   );

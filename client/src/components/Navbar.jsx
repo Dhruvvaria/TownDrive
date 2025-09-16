@@ -6,12 +6,11 @@ import toast from "react-hot-toast";
 import { motion } from "motion/react";
 
 function Navbar() {
-  const { setShowLogin, user, logout, isOwner, axios, setIsOwner } =
+  const { setShowLogin, user, logout, isOwner, axios, setIsOwner, navigate } =
     useAppContext();
 
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   const changeRole = async () => {
     try {
@@ -51,7 +50,7 @@ function Navbar() {
         } ${open ? "max-sm:translate-x-0" : "max-sm:-translate-x-full"}
         `}>
         {menuLinks.map((link, index) => (
-          <Link key={index} to={link.path}>
+          <Link key={index} to={link.path} onClick={() => setOpen(false)}>
             {link.name}
           </Link>
         ))}

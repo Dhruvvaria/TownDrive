@@ -29,7 +29,7 @@ function Sidebar() {
   };
 
   return (
-    <div className="relative min-h-screen md:flex flex-col items-center pt-8 max-w-13 md:max-w-60 w-full border-r border-borderColor text-sm">
+    <div className="relative min-h-screen md:flex flex-col items-center pt-2 max-w-13 md:max-w-60 w-full border-r border-borderColor text-sm">
       <div className="group relative">
         <label htmlFor="image">
           <img
@@ -37,10 +37,9 @@ function Sidebar() {
             src={
               image
                 ? URL.createObjectURL(image)
-                : user?.image ||
-                  "https://images.unsplash.com/photo-1754051486494-cfdbf29a589c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                : user?.image || assets.user_profile
             }
-            alt=""
+            alt="User"
           />
           <input
             type="file"

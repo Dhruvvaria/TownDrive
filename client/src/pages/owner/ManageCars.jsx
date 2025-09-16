@@ -3,6 +3,7 @@ import { assets } from "../../assets/assets";
 import Title from "../../components/owner/Title";
 import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
+import { motion } from "motion/react";
 
 function ManageCars() {
   const { axios, isOwner, currency } = useAppContext();
@@ -77,56 +78,72 @@ function ManageCars() {
               <th className="p-3 font-medium">Actions</th>
             </tr>
           </thead>
+
           <tbody>
-            {cars.map((car, index) => (
-              <tr key={index} className="border-t border-borderColor">
-                <td className="p-3 flex items-center gap-3">
-                  <img
-                    src={car.image}
-                    alt=""
-                    className="h-12 w-12 aspect-square rounded-md object-cover"
-                  />
-                  <div className="max-md:hidden">
-                    <p className="font-medium">
-                      {car.brand} {car.model}{" "}
-                    </p>
-                    <p className="font-xs text-gray-500">
-                      {car.seating_capacity} • {car.transmission}{" "}
-                    </p>
-                  </div>
-                </td>
-                <td className="p-3 max-md:hidden">{car.category}</td>
-                <td className="p-3">
-                  {car.pricePerDay} {currency}
-                </td>
-                <td className="p-3 max-md:hidden">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs ${
-                      car.isAvailable
-                        ? "bg-green-100 text-green-500"
-                        : "bg-red-100 text-red-500"
-                    }`}>
-                    {car.isAvailable ? "Available" : "Unavailable"}
-                  </span>
-                </td>
-                <td className="p-3 flex items-center">
-                  <img
-                    onClick={() => toggleAvailability(car._id)}
-                    src={
-                      car.isAvailable ? assets.eye_close_icon : assets.eye_icon
-                    }
-                    alt=""
-                    className="cursor-pointer"
-                  />
-                  <img
-                    onClick={() => deleteCar(car._id)}
-                    src={assets.delete_icon}
-                    alt=""
-                    className="cursor-pointer"
-                  />{" "}
+            {cars.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="p-6 text-center text-red-500">
+                  You have not listed any cars yet.
                 </td>
               </tr>
-            ))}
+            ) : (
+              cars.map((car, index) => (
+                <motion.tr
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.2, delay: index * 0.1 }}
+                  key={index}
+                  className="border-t border-borderColor">
+                  <td className="p-3 flex items-center gap-3">
+                    <img
+                      src={car.image}
+                      alt=""
+                      className="h-12 w-12 aspect-square rounded-md object-cover"
+                    />
+                    <div className="max-md:hidden">
+                      <p className="font-medium">
+                        {car.brand} {car.model}{" "}
+                      </p>
+                      <p className="font-xs text-gray-500">
+                        {car.seating_capacity} • {car.transmission}{" "}
+                      </p>
+                    </div>
+                  </td>
+                  <td className="p-3 max-md:hidden">{car.category}</td>
+                  <td className="p-3">
+                    {car.pricePerDay} {currency}
+                  </td>
+                  <td className="p-3 max-md:hidden">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs ${
+                        car.isAvailable
+                          ? "bg-green-100 text-green-500"
+                          : "bg-red-100 text-red-500"
+                      }`}>
+                      {car.isAvailable ? "Available" : "Unavailable"}
+                    </span>
+                  </td>
+                  <td className="p-3 flex items-center">
+                    <img
+                      onClick={() => toggleAvailability(car._id)}
+                      src={
+                        car.isAvailable
+                          ? assets.eye_close_icon
+                          : assets.eye_icon
+                      }
+                      alt=""
+                      className="cursor-pointer"
+                    />
+                    <img
+                      onClick={() => deleteCar(car._id)}
+                      src={assets.delete_icon}
+                      alt=""
+                      className="cursor-pointer"
+                    />{" "}
+                  </td>
+                </motion.tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
