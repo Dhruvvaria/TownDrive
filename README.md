@@ -1,12 +1,12 @@
 # Town Drive
 
 <p align="center">
-  <img src="client/public/logo.svg" alt="Town Drive Logo" width="180" />
+  <img src="client/src/assets/logo.svg" alt="Town Drive Logo" width="180" />
 </p>
 
 ## Live URL
 
-[https://towndrive.vercel.app](https://towndrive.vercel.app)
+[https://town-drive.vercel.app](https://town-drive.vercel.app)
 
 ## Overview
 
