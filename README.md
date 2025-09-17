@@ -1,7 +1,9 @@
 # Town Drive
 
 <p align="center">
-  <img src="client/src/assets/logo.svg" alt="Town Drive Logo" width="180" />
+   <span style="background: #fff; display: inline-block; border-radius: 12px; padding: 12px;">
+      <img src="client/src/assets/logo.svg" alt="Town Drive Logo" width="180" />
+   </span>
 </p>
 
 ## Live URL
@@ -30,7 +32,7 @@ Town Drive is a full-stack car rental application built with React (frontend) an
 
 1. Clone the repository:
    ```
-   git clone <repo-url>
+   git clone https://github.com/Dhruvvaria/TownDrive
    ```
 2. Install dependencies for both frontend and backend:
    ```
