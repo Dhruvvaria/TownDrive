@@ -1,9 +1,7 @@
 # Town Drive
 
 <p align="center">
-   <span style="background: #fff; display: inline-block; border-radius: 12px; padding: 12px;">
-      <img src="client/src/assets/logo.svg" alt="Town Drive Logo" width="180" />
-   </span>
+      <img src="client/public/readme_logo.png" alt="Town Drive Logo" width="180" />
 </p>
 
 ## Live URL
